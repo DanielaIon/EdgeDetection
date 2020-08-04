@@ -1,0 +1,52 @@
+
+.tile {
+    margin: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    width: 18vw;
+    display: flex;
+    flex-direction: column;
+  }
+
+.magnified {
+    height: 40vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    margin-top: -30vw;
+    margin-left: -20vw;
+    box-shadow: 0 0 40vw 5vw rgba(0, 0, 0, 0.8);
+    transform: none;
+}
+
+.small {
+    width: 18vw;
+}
+
+
+.Upload .fileContainer { 
+    background-color: transparent !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+  
+.Upload .fileContainer .chooseFileButton {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.Upload .fileContainer button,  .RefreshButton { 
+    background-color: transparent !important;
+}
+
+.RefreshButton { 
+    background-color: transparent !important;
+    border: 0px;
+}
+
+.MuiSvgIcon-root {
+    color: white;
+}
+
+   

@@ -1,0 +1,11 @@
+.picture {
+  padding: 12vh 0vh;
+  height: 60vh;
+  width: auto;
+}
+
+.picture .carousel-indicators li { visibility: hidden; }
+
+.body {
+  background-color: #000000;
+}
