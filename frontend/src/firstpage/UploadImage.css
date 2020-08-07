@@ -1,0 +1,35 @@
+.App-header {
+    /* background-color: #000000; */
+    font-size: calc(10px + 2vmin);
+    color: white;
+    text-emphasis-color: white;
+}
+
+.App-table td{
+    width: 60vmin;
+}
+
+.App-menu {
+    padding: 10vmin 0vmin;
+    text-align: center;
+    vertical-align: text-top;
+}
+
+.App-menu p{
+    display: inline;
+}
+
+.Upload .fileContainer { 
+    background-color: transparent !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+  
+.Upload .fileContainer .chooseFileButton {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.Upload .fileContainer button,  .RefreshButton { 
+    background-color: transparent !important;
+}

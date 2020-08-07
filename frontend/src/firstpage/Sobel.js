@@ -97,7 +97,7 @@ class Sobel extends React.Component {
                           buttonText='Choose image'
                           singleImage={true}
                           onChange={this.onFileChange}
-                          imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                          imgExtension={['.jpg', '.png']}
                           maxFileSize={5242880}
                       />
                       </td>

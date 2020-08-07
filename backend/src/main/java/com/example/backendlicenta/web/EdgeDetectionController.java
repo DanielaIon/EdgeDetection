@@ -14,67 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
-
 @RestController
+@RequestMapping("/edge-detection")
 public class EdgeDetectionController {
-
-    private VoteManager voteManager;
-
-    public EdgeDetectionController() {
-        this.voteManager = new VoteManager(
-                List.of(
-                        new Voter() {
-                            @Override
-                            public Mat detectEdges(Mat image) {
-                                return EdgeDetection.applySobel(image);
-                            }
-                        },
-                        new Voter() {
-                            @Override
-                            public Mat detectEdges(Mat image) {
-                                return EdgeDetection.applySobelFeldman(image);
-                            }
-                        },
-                        new Voter() {
-                            @Override
-                            public Mat detectEdges(Mat image) {
-                                return EdgeDetection.applyPrewitt(image);
-                            }
-                        },
-                        new Voter() {
-                            @Override
-                            public Mat detectEdges(Mat image) {
-                                return EdgeDetection.applyScharr(image);
-                            }
-                        }
-                ),
-                new TrustEvaluationPercent(0.1),
-                0.5,
-                new BinarizationThresholdFixed(128.0));
-    }
-
-    @CrossOrigin
-    @PostMapping(value = "/test", consumes = { "multipart/form-data" })
-    public String test(@RequestPart("img") MultipartFile file) {
-        try {
-            byte [] content = file.getBytes();
-
-            //Citeste imaginea
-            Mat image = Imgcodecs.imdecode(new MatOfByte(content), -1);
-
-            image = voteManager.elect(image);
-
-            MatOfByte mob = new MatOfByte();
-            Imgcodecs.imencode(".png", image, mob);
-            return DatatypeConverter.printBase64Binary(mob.toArray());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     @CrossOrigin
     @PostMapping(value = "/sobel", consumes = { "multipart/form-data" })

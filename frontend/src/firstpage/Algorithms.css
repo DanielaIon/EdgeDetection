@@ -1,0 +1,74 @@
+.tiles {
+  padding: 6vh 6vw;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+}
+
+.App {
+  text-align: left;
+}
+
+.App-table td{
+  width: 60vmin;
+}
+
+.App-image {
+  padding: 10vmin 0vmin;
+  height: 60vmin;
+}
+
+.App-menu {
+  padding: 10vmin 0vmin;
+  text-align: center;
+  vertical-align: text-top;
+}
+
+.App-menu p{
+  display: inline;
+}
+
+.Table {
+  width: inherit;
+}
+.Buttons {
+  width: inherit;
+}
+
+.App-header {
+  /* background-color: #000000; */
+  font-size: calc(10px + 2vmin);
+  color: white;
+  text-emphasis-color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.picture {
+  padding: 12vh 0vh;
+  height: 60vh;
+  width: auto;
+}
+
+.picture .carousel-indicators li { visibility: hidden; }
+
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

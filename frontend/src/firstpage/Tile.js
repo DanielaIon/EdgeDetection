@@ -87,7 +87,7 @@ class Tile extends React.Component {
                                 buttonText={<BackupOutlinedIcon/>}
                                 singleImage={true}
                                 onChange={this.upload}
-                                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                imgExtension={['.jpg', '.png']}
                                 maxFileSize={5242880}
                             />
                         </td>

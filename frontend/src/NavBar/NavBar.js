@@ -5,7 +5,8 @@ function NavBar() {
   return (
     <div className='container-fluid body' >
       <ul className="NavBar">
-        <li><a href="/">EdgeDetection</a></li>
+        <li><a href="/merge">Merge</a></li>
+        <li><a href="/algorithms">Algorithms</a></li>
       </ul>   
     </div>
   );

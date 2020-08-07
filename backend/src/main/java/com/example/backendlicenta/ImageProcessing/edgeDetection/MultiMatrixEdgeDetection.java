@@ -3,7 +3,7 @@ package com.example.backendlicenta.ImageProcessing.edgeDetection;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-public class MultiMatrixConvolution implements IConvolution {
+public class MultiMatrixEdgeDetection implements IEdgeDetection {
 
     private int[][] gx, gy;
 
@@ -11,7 +11,7 @@ public class MultiMatrixConvolution implements IConvolution {
 
     private int threshold;
 
-    public MultiMatrixConvolution(int[][] gx, int[][] gy, int size, int threshold) {
+    public MultiMatrixEdgeDetection(int[][] gx, int[][] gy, int size, int threshold) {
         this.gx = gx;
         this.gy = gy;
         this.size = size;

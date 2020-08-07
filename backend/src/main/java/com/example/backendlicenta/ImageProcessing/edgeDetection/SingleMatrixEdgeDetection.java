@@ -3,11 +3,11 @@ package com.example.backendlicenta.ImageProcessing.edgeDetection;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-public class SingleMatrixConvolution implements IConvolution {
+public class SingleMatrixEdgeDetection implements IEdgeDetection {
 
     private int[][] matrix;
 
-    public SingleMatrixConvolution(int[][] matrix) {
+    public SingleMatrixEdgeDetection(int[][] matrix) {
         this.matrix = matrix;
     }
 

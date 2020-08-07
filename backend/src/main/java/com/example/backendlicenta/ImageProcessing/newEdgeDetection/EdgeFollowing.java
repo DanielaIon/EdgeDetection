@@ -81,7 +81,7 @@ public class EdgeFollowing  {
                                     prevDirection(px.getDirection())));
 
 
-        return q.toArray(PixelCoordonates[]::new);
+        return q.toArray(new PixelCoordonates[]{});
     }
 
     public PixelCoordonates[] getSeedNeighbours(Mat image, PixelCoordonates px, VisitRegistry visitRegistry){
@@ -98,7 +98,7 @@ public class EdgeFollowing  {
         }
 
         return q.stream()
-                .filter(Predicate.not(visitRegistry::isVisited))
+                .filter(p -> !visitRegistry.isVisited(p))
                 .filter(p -> getValue(image, p) > 0.0)
                 .toArray(PixelCoordonates[]::new);
     }

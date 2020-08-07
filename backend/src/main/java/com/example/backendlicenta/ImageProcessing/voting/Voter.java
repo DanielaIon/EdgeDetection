@@ -1,15 +1,21 @@
 package com.example.backendlicenta.ImageProcessing.voting;
 
+import com.example.backendlicenta.ImageProcessing.edgeDetection.IEdgeDetection;
 import com.example.backendlicenta.ImageProcessing.voting.binarization.Binarization;
 import com.example.backendlicenta.ImageProcessing.voting.binarization.BinarizationThresholdStrategy;
 import org.opencv.core.Mat;
 
-public abstract class Voter {
+public class Voter {
 
-    public abstract Mat detectEdges(Mat image);
+    private IEdgeDetection edgeDetection;
+
+    public Voter(IEdgeDetection edgeDetection) {
+        this.edgeDetection = edgeDetection;
+    }
 
     public boolean[][] vote(Mat image, BinarizationThresholdStrategy thresholdSelection) {
-        Mat output = detectEdges(image);
+        Mat output = edgeDetection.apply(image);
         return Binarization.apply(output, thresholdSelection);
     }
+
 }
