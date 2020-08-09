@@ -1,11 +1,6 @@
 package com.example.backendlicenta.web;
 
 import com.example.backendlicenta.ImageProcessing.edgeDetection.EdgeDetection;
-import com.example.backendlicenta.ImageProcessing.newEdgeDetection.*;
-import com.example.backendlicenta.ImageProcessing.voting.VoteManager;
-import com.example.backendlicenta.ImageProcessing.voting.Voter;
-import com.example.backendlicenta.ImageProcessing.voting.binarization.BinarizationThresholdFixed;
-import com.example.backendlicenta.ImageProcessing.voting.trust.TrustEvaluationPercent;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -14,8 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 @RequestMapping("/edge-detection")

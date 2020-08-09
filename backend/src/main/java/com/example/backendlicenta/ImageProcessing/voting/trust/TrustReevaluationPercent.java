@@ -2,16 +2,16 @@ package com.example.backendlicenta.ImageProcessing.voting.trust;
 
 import org.opencv.core.Mat;
 
-public class TrustEvaluationPercent implements TrustEvaluateStrategy {
+public class TrustReevaluationPercent implements TrustReevaluationStrategy {
 
     private final double percent;
 
-    public TrustEvaluationPercent(double percent) {
+    public TrustReevaluationPercent(double percent) {
         this.percent = percent;
     }
 
     @Override
-    public Double evaluate(Double crtTrust, boolean[][] vote, Mat result) {
+    public Double reevaluate(Double crtTrust, boolean[][] vote, Mat result) {
         int errors = 0;
         int corrects = 0;
 

@@ -1,49 +1,85 @@
 package com.example.backendlicenta.ImageProcessing.voting;
 
 import com.example.backendlicenta.ImageProcessing.voting.binarization.BinarizationThresholdStrategy;
-import com.example.backendlicenta.ImageProcessing.voting.trust.TrustEvaluateStrategy;
+import com.example.backendlicenta.ImageProcessing.voting.trust.TrustReevaluationStrategy;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class VoteManager {
 
-    private Map<Voter, Double> votersRegistry;
+    private Map<String, Voter> votersRegistry;
 
-    private BinarizationThresholdStrategy binarizationThreshold;
+    private Map<String, TrustReevaluationStrategy> trustReevaluationRegistry;
 
-    private Double trustThreshold;
+    private Map<String, BinarizationThresholdStrategy> binarizationThresholdRegistry;
 
-    private TrustEvaluateStrategy trustEvaluator;
-
-    public VoteManager(List<Voter> voters, TrustEvaluateStrategy trustEvaluator, Double trustThreshold, BinarizationThresholdStrategy binarizationThreshold) {
-        this.votersRegistry = voters.stream().collect(Collectors.toMap(v -> v, v -> 1.0));
-        this.trustEvaluator = trustEvaluator;
-        this.trustThreshold = trustThreshold;
-        this.binarizationThreshold = binarizationThreshold;
+    public VoteManager(Map<String, Voter> votersRegistry,
+                       Map<String, TrustReevaluationStrategy> trustReevaluationRegistry,
+                       Map<String, BinarizationThresholdStrategy> binarizationThresholdRegistry) {
+        this.votersRegistry = votersRegistry;
+        this.trustReevaluationRegistry = trustReevaluationRegistry;
+        this.binarizationThresholdRegistry = binarizationThresholdRegistry;
     }
 
-    public Mat elect(Mat image) {
+    private void validateVoterTrust(Map<String, Double> voterTrust) {
+        List<String> aux = voterTrust.keySet().stream()
+                .filter(voterName -> !votersRegistry.containsKey(voterName))
+                .collect(Collectors.toList());
+
+        if (aux.size() > 0) {
+            throw new IllegalArgumentException("No voters with names: " + Arrays.toString(aux.toArray()));
+        }
+    }
+
+    private void validateElectionParameters(Map<String, Double> voterTrust, String trustReevaluation, String binarizationThreshold) {
+        List<String> aux = voterTrust.keySet().stream()
+                .filter(voterName -> !votersRegistry.containsKey(voterName))
+                .collect(Collectors.toList());
+
+        if (aux.size() > 0) {
+            throw new IllegalArgumentException("No voters with names: " + Arrays.toString(aux.toArray()));
+        }
+
+        if (!trustReevaluationRegistry.containsKey(trustReevaluation)) {
+            throw new IllegalArgumentException("No trust evaluation strategy with name: " + trustReevaluation);
+        }
+
+        if (!binarizationThresholdRegistry.containsKey(binarizationThreshold)) {
+            throw new IllegalArgumentException("No binarization threshold finding strategy with name: " + binarizationThreshold);
+        }
+    }
+
+    public VoteResult elect(Mat image, Map<String, Double> voterTrust, String trustReevaluation, String binarizationThreshold, Double trustThreshold) {
+        // check input parameters validity
+        validateElectionParameters(voterTrust, trustReevaluation, binarizationThreshold);
+
         double[][] votes = new double[image.height()][image.width()];
 
         // calculate total trust
-        double total = votersRegistry.values().stream().mapToDouble(d -> d).sum();
+        double total = voterTrust.values().stream().mapToDouble(d -> d).sum();
 
         // voters cast their vote
-        Map<Voter, boolean[][]> voteMap = votersRegistry.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getKey().vote(image, binarizationThreshold)));
+        Map<String, boolean[][]> voteMap = voterTrust.keySet().stream()
+                .collect(Collectors.toMap(
+                        voterName -> voterName,
+                        voterName -> votersRegistry.get(voterName).vote(image, binarizationThresholdRegistry.get(binarizationThreshold))
+                ));
 
         // count votes
-        for (Voter key : votersRegistry.keySet()) {
+        for (String key : voterTrust.keySet()) {
             boolean[][] vote = voteMap.get(key);
             for (int i = 0; i < vote.length; i++) {
                 for (int j = 0; j < vote[i].length; j++) {
                     if (vote[i][j]) {
-                        votes[i][j] += votersRegistry.get(key);
+                        votes[i][j] += voterTrust.get(key);
                     }
                 }
             }
@@ -60,13 +96,27 @@ public class VoteManager {
         }
 
         // reevaluate voters trust
-        voteMap.forEach((voter, vote) ->
-            votersRegistry.put(voter, trustEvaluator.evaluate(votersRegistry.get(voter), vote, output))
+        voteMap.forEach((voterName, vote) ->
+                voterTrust.put(voterName, trustReevaluationRegistry.get(trustReevaluation).reevaluate(voterTrust.get(voterName), vote, output))
         );
 
-        return output;
+        return new VoteResult(output, voterTrust);
     }
 
-    
+    public List<String> getVoterNames() {
+        return new ArrayList<>(votersRegistry.keySet());
+    }
+
+    public List<String> getTrustReevaluationNames() {
+        return new ArrayList<>(trustReevaluationRegistry.keySet());
+    }
+
+    public List<String> getBinarizationThresholdNames() {
+        return new ArrayList<>(binarizationThresholdRegistry.keySet());
+    }
+
+    public void setState(String state) {
+
+    }
 
 }

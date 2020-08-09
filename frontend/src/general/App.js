@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import Algorithms from './Algorithms.js';
 import Merge from './Merge.js';
+import Voting from './Voting';
 
 class App extends React.Component {
  
@@ -26,6 +27,7 @@ class App extends React.Component {
                 <ul className="NavBar">
                     <li><Link to="/">Algorithms</Link></li>
                     <li><Link to="/merge">Merge</Link></li>
+                    <li><Link to="/voting">Vote</Link></li>
                 </ul>   
             </div>
 
@@ -36,6 +38,10 @@ class App extends React.Component {
 
                 <Route exact path="/merge">
                     <Merge/>
+                </Route>
+
+                <Route exact path="/voting">
+                    <Voting/>
                 </Route>
             </Switch>
         </BrowserRouter>
