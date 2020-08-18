@@ -67,47 +67,47 @@ class Voting extends React.Component {
             });
     }
 
-  onFileChange = (e) => {
-    let file = e[0]
-    let url = URL.createObjectURL(file);
-    this.setState({
-        img: file,
-        imgUrl: url,
-        loading: true
-    });
-
-    const formData = new FormData();
-    formData.append( 
-        "img",
-        file 
-    );
-    formData.append( 
-        "voters",
-        JSON.stringify(this.state.voters.reduce((map, v) => {
-            map[v] = this.state.trust[this.state.voters.indexOf(v)];
-            return map;
-        }, {}))
-    );
-    formData.append( 
-        "trustReevaluation",
-        this.state.trustReevaluation
-    );
-    formData.append( 
-        "binarizationThreshold",
-        this.state.binarizationThreshold
-    );
-    formData.append( 
-        "trustThreshold",
-        this.state.trustThreshold
-    );
-
-    axios.post('http://localhost:8080/voting', formData, {headers: {"Content-type": "multipart/form-data"}})
-        .then((res) => {
-            let result = "data:image/png;base64," + res.data;
-            this.setState({result: result, loading: false});
-        }).catch((error) => {
-            console.log(error);
+    onFileChange = (e) => {
+        let file = e[0]
+        let url = URL.createObjectURL(file);
+        this.setState({
+            img: file,
+            imgUrl: url,
+            loading: true
         });
+
+        const formData = new FormData();
+        formData.append( 
+            "img",
+            file 
+        );
+        formData.append( 
+            "voters",
+            JSON.stringify(this.state.voters.reduce((map, v) => {
+                map[v] = this.state.trust[this.state.voters.indexOf(v)];
+                return map;
+            }, {}))
+        );
+        formData.append( 
+            "trustReevaluation",
+            this.state.trustReevaluation
+        );
+        formData.append( 
+            "binarizationThreshold",
+            this.state.binarizationThreshold
+        );
+        formData.append( 
+            "trustThreshold",
+            this.state.trustThreshold
+        );
+
+        axios.post('http://localhost:8080/voting', formData, {headers: {"Content-type": "multipart/form-data"}})
+            .then((res) => {
+                let result = "data:image/png;base64," + res.data;
+                this.setState({result: result, loading: false});
+            }).catch((error) => {
+                console.log(error);
+            });
     }
 
     onCheckBoxClicked = (value) => {

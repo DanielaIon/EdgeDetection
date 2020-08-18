@@ -115,8 +115,55 @@ public class VoteManager {
         return new ArrayList<>(binarizationThresholdRegistry.keySet());
     }
 
-    public void setState(String state) {
+    public static class State {
 
+        private Map<String, Double> voterTrust;
+
+        private String trustReevaluation;
+
+        private String binarizationThreshold;
+
+        private Double trustThreshold;
+
+        public Map<String, Double> getVoterTrust() {
+            return voterTrust;
+        }
+
+        public void setVoterTrust(Map<String, Double> voterTrust) {
+            this.voterTrust = voterTrust;
+        }
+
+        public String getTrustReevaluation() {
+            return trustReevaluation;
+        }
+
+        public void setTrustReevaluation(String trustReevaluation) {
+            this.trustReevaluation = trustReevaluation;
+        }
+
+        public String getBinarizationThreshold() {
+            return binarizationThreshold;
+        }
+
+        public void setBinarizationThreshold(String binarizationThreshold) {
+            this.binarizationThreshold = binarizationThreshold;
+        }
+
+        public Double getTrustThreshold() {
+            return trustThreshold;
+        }
+
+        public void setTrustThreshold(Double trustThreshold) {
+            this.trustThreshold = trustThreshold;
+        }
+
+        @Override
+        public String toString() {
+            return "voterTrust=" + voterTrust.entrySet().stream().map(e -> '\'' + e.getKey() + "':" + e.getValue()) + "&" +
+                    "trustReevaluation='" + trustReevaluation + "'&" +
+                    "binarizationThreshold='" + binarizationThreshold + "'&" +
+                    "trustThreshold=" + trustThreshold;
+        }
     }
 
 }
