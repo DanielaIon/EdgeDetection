@@ -89,42 +89,47 @@ class Algorithms extends React.Component {
       address: "http://localhost:8080/edge-detection/laplace",
       name: "Laplacian",
       image: this.state.laplace},
-
-      {id: 8,
-      address: "http://localhost:8080/edge-detection/laplaced",
-      name: "Laplacian including Diagonals",
-      image: this.state.laplaceDiag},
       ];
  
      return (
       <div className="App">
-        {data.map(d => 
-            <div>
-              <input
-                  type="checkbox"
-                  onClick={this.onCheckBoxClicked(d)}
-              />
-              <label>
-                {d.name}
-              </label>
-            </div>  
-          )}
+        <div className="Container">
+          <table className="ContentTable">
+            <tr>
+                <td className="Options">
+                  {data.map(d => 
+                      <div>
+                        <input
+                            type="checkbox"
+                            onClick={this.onCheckBoxClicked(d)}
+                        />
+                        <label>
+                          {d.name}
+                        </label>
+                      </div>  
+                    )}
+                </td>
 
-        {!this.state.imgUrl   
-          ? <UploadImage onFileChange={this.onFileChange}/>
-          : <div className="tiles">
-              {!!this.state.imgUrl && 
-                this.state.selectedData.map((d, index) => {
-                  return (
-                    <Tile key={index}
-                          title={d.name}
-                          img={this.state.img}
-                          reqUrl={d.address}/>
-                  );
-                })
-              }
-            </div>
-        }
+                <td className="Pictures">
+                  {!this.state.imgUrl   
+                    ? <UploadImage onFileChange={this.onFileChange}/>
+                    : <div className="tiles">
+                        {!!this.state.imgUrl && 
+                          this.state.selectedData.map((d, index) => {
+                            return (
+                              <Tile key={index}
+                                    title={d.name}
+                                    img={this.state.img}
+                                    reqUrl={d.address}/>
+                            );
+                          })
+                        }
+                      </div>
+                  }
+                </td>
+              </tr>
+          </table>
+        </div>
       </div>
     );
   }
