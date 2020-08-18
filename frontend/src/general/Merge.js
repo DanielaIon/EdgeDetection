@@ -1,6 +1,6 @@
 import React from 'react';
 // import logo from './girl.jpg';
-import './Algorithms.css';
+import './ApplyAlgorithms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import RefreshIcon from '@material-ui/icons/Refresh';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';

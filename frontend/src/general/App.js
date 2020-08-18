@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';  
-import Algorithms from './Algorithms.js';
+import Algorithms from './ApplyAlgorithms.js';
 import Merge from './Merge.js';
 import Voting from './Voting';
 
@@ -25,14 +25,16 @@ class App extends React.Component {
              {/* navbar */}
             <div className='container-fluid body' >
                 <ul className="NavBar">
-                    <li><Link to="/">Algorithms</Link></li>
-                    <li><Link to="/merge">Merge</Link></li>
+                    <li><Link to="/home">HOME</Link></li>
+                    <li><Link to="/">Apply chosen algorithms</Link></li>
+                    <li><Link to="/merge">Merge algorithm result</Link></li>
                     <li><Link to="/voting">Vote</Link></li>
                 </ul>   
             </div>
 
             <Switch>
                 <Route exact path="/">
+                    {/* <Algorithms/> */}
                     <Algorithms/>
                 </Route>
 
