@@ -76,9 +76,9 @@ class Tile extends React.Component {
                 <p>{this.state.title}</p>
                 <table className="Table">
                     <tr className="Buttons">
-                        <td>
+                        {/* <td>
                             <button type="submit" onClick={this.load} className="RefreshButton"><RefreshIcon/></button>
-                        </td>
+                        </td> */}
                         <td>
                             <ImageUploader
                                 className="Upload"

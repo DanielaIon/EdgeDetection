@@ -88,13 +88,14 @@ class Algorithms extends React.Component {
         <div>
           {this.state.options.map(op => 
             <div>
-              <input
+              <label className="container">
+                {op}
+                <input
                   type="checkbox"
                   checked={this.state.selectedOptions.filter(sop => op === sop).length > 0}
                   onClick={this.onCheckBoxClicked(op)}
               />
-              <label>
-                {op}
+              <span class="checkmark"></span>
               </label>
             </div>  
           )}

@@ -4,6 +4,9 @@ import './ApplyAlgorithms.css';
 import UploadImage from './UploadImage';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import Tile from './Tile.js';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined'; 
+import ImageUploader from 'react-images-upload'; 
 
 class Algorithms extends React.Component {
  
@@ -37,6 +40,7 @@ class Algorithms extends React.Component {
   onCheckBoxClicked = (value) => {
     return (e) => {
       if (e.target.checked) {
+
         this.setState({
           selectedData: [...this.state.selectedData, value]
         });
@@ -48,7 +52,10 @@ class Algorithms extends React.Component {
     }
   }
 
+  
   render() {
+    this.state.selectedData.forEach(d => console.log(d))
+
     const data = [
       {id: 0,
         address: "http://localhost:8080/edge-detection/test",
@@ -93,42 +100,55 @@ class Algorithms extends React.Component {
  
      return (
       <div className="App">
-        <div className="Container">
-          <table className="ContentTable">
-            <tr>
-                <td className="Options">
-                  {data.map(d => 
-                      <div>
-                        <input
-                            type="checkbox"
-                            onClick={this.onCheckBoxClicked(d)}
-                        />
-                        <label>
-                          {d.name}
-                        </label>
-                      </div>  
-                    )}
-                </td>
+        <div className="DivContainer">
+            <div className="Options">
+              <div height="0px">
+                {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
 
-                <td className="Pictures">
-                  {!this.state.imgUrl   
-                    ? <UploadImage onFileChange={this.onFileChange}/>
-                    : <div className="tiles">
-                        {!!this.state.imgUrl && 
-                          this.state.selectedData.map((d, index) => {
-                            return (
-                              <Tile key={index}
-                                    title={d.name}
-                                    img={this.state.img}
-                                    reqUrl={d.address}/>
-                            );
-                          })
-                        }
-                      </div>
-                  }
-                </td>
-              </tr>
-          </table>
+                <ImageUploader
+                        className="Upload"
+                        withIcon={false}
+                        withLabel={false}
+                        buttonText={<BackupOutlinedIcon/>}
+                        singleImage={true}
+                        onChange={this.onFileChange}
+                        imgExtension={['.jpg', '.png']}
+                        maxFileSize={5242880}
+                />
+             </div>
+
+              <br/>
+              {data.map(d => 
+                  <div>
+                    <label className="container">
+                      {d.name}
+                      <input
+                        type="checkbox"
+                        onClick={this.onCheckBoxClicked(d)}
+                    />
+                    <span class="checkmark"></span>
+                    </label>
+                  </div>  
+                )}
+            </div>
+
+            <div className="Pictures">
+              {!this.state.imgUrl   
+                ? <br/>
+                : <div className="tiles">
+                    {!!this.state.imgUrl && 
+                      this.state.selectedData.map((d) => {
+                        return (
+                          <Tile key={d.id}
+                                title={d.name}
+                                img={this.state.img}
+                                reqUrl={d.address}/>
+                        );
+                      })
+                    }
+                  </div>
+              }
+            </div>
         </div>
       </div>
     );
