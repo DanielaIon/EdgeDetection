@@ -102,22 +102,6 @@ class Algorithms extends React.Component {
       <div className="App">
         <div className="DivContainer">
             <div className="Options">
-              <div height="0px">
-                {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
-
-                <ImageUploader
-                        className="Upload"
-                        withIcon={false}
-                        withLabel={false}
-                        buttonText={<BackupOutlinedIcon/>}
-                        singleImage={true}
-                        onChange={this.onFileChange}
-                        imgExtension={['.jpg', '.png']}
-                        maxFileSize={5242880}
-                />
-             </div>
-
-              <br/>
               {data.map(d => 
                   <div>
                     <label className="container">
@@ -130,12 +114,26 @@ class Algorithms extends React.Component {
                     </label>
                   </div>  
                 )}
+                <div height="0px">
+                  <ImageUploader
+                          className="Upload"
+                          withIcon={false}
+                          withLabel={false}
+                          buttonText={<BackupOutlinedIcon/>}
+                          singleImage={true}
+                          onChange={this.onFileChange}
+                          imgExtension={['.jpg', '.png']}
+                          maxFileSize={5242880}
+                  />
+                  
+                  {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
+                </div>
             </div>
 
             <div className="Pictures">
-              {!this.state.imgUrl   
-                ? <br/>
-                : <div className="tiles">
+              {this.state.imgUrl   
+                &&
+                 <div className="tiles">
                     {!!this.state.imgUrl && 
                       this.state.selectedData.map((d) => {
                         return (

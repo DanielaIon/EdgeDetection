@@ -1,6 +1,6 @@
 import React from 'react';
 // import logo from './girl.jpg';
-import './ApplyAlgorithms.css';
+import './Merge.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import RefreshIcon from '@material-ui/icons/Refresh';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
@@ -85,50 +85,50 @@ class Algorithms extends React.Component {
     
     return (
       <div className="App">
-        <div>
-          {this.state.options.map(op => 
-            <div>
-              <label className="container">
-                {op}
-                <input
-                  type="checkbox"
-                  checked={this.state.selectedOptions.filter(sop => op === sop).length > 0}
-                  onClick={this.onCheckBoxClicked(op)}
+        <div className="DivContainer">
+          <div className="Options">
+            {this.state.options.map(op => 
+              <div>
+                <label className="container">
+                  {op}
+                  <input
+                    type="checkbox"
+                    checked={this.state.selectedOptions.filter(sop => op === sop).length > 0}
+                    onClick={this.onCheckBoxClicked(op)}
+                />
+                <span class="checkmark"></span>
+                </label>
+              </div> 
+            )} 
+
+            <div height="0px">
+              <ImageUploader
+                      className="Upload"
+                      withIcon={false}
+                      withLabel={false}
+                      buttonText={<BackupOutlinedIcon/>}
+                      singleImage={true}
+                      onChange={this.onFileChange}
+                      imgExtension={['.jpg', '.png']}
+                      maxFileSize={5242880}
               />
-              <span class="checkmark"></span>
-              </label>
-            </div>  
-          )}
-        </div>
-        {!this.state.imgUrl   
-          ? <UploadImage onFileChange={this.onFileChange}/>
-          : <div className="tile">
-              <p>{this.state.title}</p>
-              <table className="Table">
-                  <tr className="Buttons">
-                      <td>
-                          <button type="submit" onClick={this.load} className="RefreshButton"><RefreshIcon/></button>
-                      </td>
-                      <td>
-                          <ImageUploader
-                              className="Upload"
-                              withIcon={false}
-                              withLabel={false}
-                              buttonText={<BackupOutlinedIcon/>}
-                              singleImage={true}
-                              onChange={this.upload}
-                              imgExtension={['.jpg', '.png']}
-                              maxFileSize={5242880}
-                          />
-                      </td>
-                  </tr>
-              </table>
-              <img    src={this.state.loading ? "https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" : this.state.result}
-                      onClick={this.onImageClick}
-                      className={this.state.open ? 'magnified' : 'small'}/>
+              {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
             </div>
-            
-        }
+            <br/>
+          </div>
+          <div className="Pictures">
+            {this.state.imgUrl &&
+            <div className="MergedPictureContainer">
+              <center>
+                <img
+                  className="MergedPicture"    
+                  src={this.state.loading ? "https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" : this.state.result}
+                />
+              </center>
+            </div>
+            }
+          </div>
+        </div>
       </div>
     );
   }
