@@ -116,16 +116,12 @@ class Algorithms extends React.Component {
             </div>
             <br/>
           </div>
-          <div className="Pictures">
+          <div className="MergedPictures">
             {this.state.imgUrl &&
-            <div className="MergedPictureContainer">
-              <center>
                 <img
-                  className="MergedPicture"    
+                  className="MergedPicture"
                   src={this.state.loading ? "https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" : this.state.result}
                 />
-              </center>
-            </div>
             }
           </div>
         </div>

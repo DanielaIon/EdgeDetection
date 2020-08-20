@@ -72,4 +72,40 @@
       transform: rotate(360deg);
     }
   }
+
+  .StateTrustNumber {
+    width: 50px;
+  }
   
+  
+.Options {
+  width:260px;
+  padding: 10px 10px;
+  position: fixed;
+  vertical-align: top;
+}
+
+.OptionsPicture {
+  max-width: 150px;
+  justify-self: center;
+}
+
+.ElectionPictures {
+  width:80%;
+  vertical-align: top;
+  margin-left: 260px;
+  height: 100%;
+  background-position-x: fixed;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  padding: 20px 20px;
+}
+.ElectionResult {
+  max-width:800px;
+  max-height:650px;
+}
+
+.Inputs {
+  width: 200px;
+}

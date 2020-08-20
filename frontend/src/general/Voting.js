@@ -50,17 +50,22 @@ class Voting extends React.Component {
 
         axios.get('http://localhost:8080/voting/trust-reevaluations')
             .then((res) => {
+                const aux = res.data.sort();
                 this.setState({
-                    trustReevaluationOptions: res.data.sort()
+                    trustReevaluationOptions: aux,
+                    trustReevaluation: aux[0]
                 });
             }).catch((error) => {
                 console.log(error);
             });
         
+
         axios.get('http://localhost:8080/voting/binarization-threshold')
             .then((res) => {
+                const aux = res.data.sort();
                 this.setState({
-                    binarizationThresholdOptions: res.data.sort()
+                    binarizationThresholdOptions: aux,
+                    binarizationThreshold: aux[0]
                 });
             }).catch((error) => {
                 console.log(error);
@@ -170,86 +175,113 @@ class Voting extends React.Component {
     
     return (
         <div className="App">
-            {!this.state.imgUrl   
-                ?   <div>
-                        <UploadImage onFileChange={this.onFileChange}/>
+                <div  className="Options">
+                    <div>
                         Edge Detection Strategies:
                         {this.state.voterOptions.map((data, idx) => 
                             <div key={idx}>
-                                <input  type="checkbox"
-                                        checked={this.state.voters.indexOf(data) >= 0}
-                                        onChange={this.onCheckBoxClicked(data)}
-                                />
-                                {data}
-                                {this.state.voters.indexOf(data) >= 0 &&
-                                    <input  type="number"
-                                            step="any"
-                                            value={this.state.trust[this.state.voters.indexOf(data)]}
-                                            onChange={this.onTrustChange(data)}/>
-                                }
+                                {/* <label className="container"> */}
+                                    <input  type="checkbox"
+                                            checked={this.state.voters.indexOf(data) >= 0}
+                                            onChange={this.onCheckBoxClicked(data)}
+                                    />
+
+                                    {/* <span class="checkmark"></span> */}
+                                {/* </label> */}
+
+                                    {'\u00A0'}{'\u00A0'}
+
+                                    {this.state.voters.indexOf(data) >= 0 &&
+                                        <input  type="number"
+                                                step="any"
+                                                value={this.state.trust[this.state.voters.indexOf(data)]}
+                                                onChange={this.onTrustChange(data)}
+                                                className="StateTrustNumber"/>
+                                    }
+                                    
+                                    {'\u00A0'}{'\u00A0'}
+
+                                    {data}
                             </div>
                         )}
-                        <div>
-                            Trust Reevaluation Strategy:
-                            <select onChange={this.onTrustReevaluationChange}>
-                                <option hidden disabled selected value>
-                                    -- select an option --
-                                </option>
-                                {this.state.trustReevaluationOptions.map((op, idx) => 
-                                    <option value={op} key={idx}>
-                                        {op}
-                                    </option> 
-                                )}
-                            </select>
-                        </div>
-                        <div>
-                            Binarization Threshold Strategy:
-                            <select onChange={this.onBinarizationThresholdChange}>
-                                <option hidden disabled selected value>
-                                    -- select an option -- 
-                                </option>
-                                {this.state.binarizationThresholdOptions.map((op, idx) => 
-                                    <option value={op} key={idx}>
-                                        {op}
-                                    </option> 
-                                )}
-                            </select>
-                        </div>
-                        <div>
-                            Trust Threshold:
-                            <input  type="number"
-                                    step="any"
-                                    value={this.state.trustThreshold}
-                                    onChange={this.onTrustThresholdChange}/>
-                        </div>
                     </div>
-                : <div className="tile">
-                    <p>{this.state.title}</p>
-                    <table className="Table">
-                        <tr className="Buttons">
-                            <td>
-                                <button type="submit" onClick={this.load} className="RefreshButton"><RefreshIcon/></button>
-                            </td>
-                            <td>
-                                <ImageUploader
-                                className="Upload"
-                                withIcon={false}
-                                withLabel={false}
-                                buttonText={<BackupOutlinedIcon/>}
-                                singleImage={true}
-                                onChange={this.upload}
-                                imgExtension={['.jpg', '.png']}
-                                maxFileSize={5242880}
-                                />
-                            </td>
-                        </tr>
-                    </table>
-                    <img    src={this.state.loading ? "https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" : this.state.result}
-                    onClick={this.onImageClick}
-                    className={this.state.open ? 'magnified' : 'small'}/>
+
+                    <br/>
+                    
+                    <div>
+                        Trust Reevaluation Strategy:
+                        <br/>
+                        <select className="Inputs"
+                                onChange={this.onTrustReevaluationChange}>
+                            {this.state.trustReevaluationOptions.map((op, idx) => 
+                                <option 
+                                    value={op} 
+                                    key={idx}
+                                    selected={op===this.state.trustReevaluation}>
+                                   
+                                    {op}
+                                    
+                                </option> 
+                            )}
+                        </select>
+                    </div>
+                       
+                    <br/>
+
+                    <div>
+                        Binarization Threshold Strategy:
+                        <br/>
+                        <select className="Inputs"
+                                onChange={this.onBinarizationThresholdChange}>
+                            {this.state.binarizationThresholdOptions.map((op, idx) => 
+                                <option
+                                        value={op} 
+                                        key={idx}
+                                        selected={op===this.state.binarizationThreshold}>
+                                    {op}
+                                </option> 
+                            )}
+                        </select>
+                    </div>
+
+                    <br/>
+
+                    <div>
+                        Trust Threshold:
+                        <br/>
+                        <input  className="Inputs"
+                                type="number"
+                                step="any"
+                                value={this.state.trustThreshold}
+                                onChange={this.onTrustThresholdChange}/>
+                    </div>
+
+                    <br/>
+                    
+                    <ImageUploader
+                      className="Upload"
+                      withIcon={false}
+                      withLabel={false}
+                      buttonText={<BackupOutlinedIcon/>}
+                      singleImage={true}
+                      onChange={this.onFileChange}
+                      imgExtension={['.jpg', '.png']}
+                      maxFileSize={5242880}
+                    />
+
+
+                    {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
+
                 </div>
                 
-            }
+            <div>
+                {this.state.imgUrl  &&
+                    <div className="ElectionPictures">
+                        <img src={this.state.loading ? "https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" : this.state.result}
+                            className="ElectionResult"/>
+                    </div>
+                }
+            </div>
         </div>
     );
   }
