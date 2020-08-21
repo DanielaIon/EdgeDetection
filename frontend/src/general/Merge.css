@@ -84,10 +84,19 @@
   padding: 10px 10px;
   position: fixed;
   vertical-align: top;
+  top: 50px;
+  left: 0;
 }
 
+
 .OptionsPicture {
+  max-height: 150px;
+}
+
+.OptionsPictureContainer {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .MergedPictures {

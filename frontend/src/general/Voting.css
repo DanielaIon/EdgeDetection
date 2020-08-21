@@ -75,19 +75,39 @@
 
   .StateTrustNumber {
     width: 50px;
+    position: absolute;
+    left: 40px;
+    height: 20px;
+  }
+
+  
+  .LabelStyle {
+    position: absolute;
+    display: inline-block;
+    left: 100px;
   }
   
+  .VoteCheckbox .StateTrustNumber .LabelStyle {
+    display: inline;
+  }
   
 .Options {
   width:260px;
+  height: 100%;
   padding: 10px 10px;
   position: fixed;
   vertical-align: top;
+  background-color: #ddd5e1  ;
+}
+
+.OptionsPictureContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .OptionsPicture {
-  max-width: 150px;
-  justify-self: center;
+  max-height: 130px;
 }
 
 .ElectionPictures {
@@ -109,3 +129,4 @@
 .Inputs {
   width: 200px;
 }
+

@@ -180,28 +180,31 @@ class Voting extends React.Component {
                         Edge Detection Strategies:
                         {this.state.voterOptions.map((data, idx) => 
                             <div key={idx}>
-                                {/* <label className="container"> */}
-                                    <input  type="checkbox"
-                                            checked={this.state.voters.indexOf(data) >= 0}
-                                            onChange={this.onCheckBoxClicked(data)}
-                                    />
+                                <div className="VoteCheckbox">
+                                    <label className="container">
+                                        <input  type="checkbox"
+                                                checked={this.state.voters.indexOf(data) >= 0}
+                                                onChange={this.onCheckBoxClicked(data)}
+                                        />
 
-                                    {/* <span class="checkmark"></span> */}
-                                {/* </label> */}
+                                        <span class="checkmark"></span>
+                                    </label> 
+                                </div>
 
-                                    {'\u00A0'}{'\u00A0'}
+                                {'\u00A0'}{'\u00A0'}
 
-                                    {this.state.voters.indexOf(data) >= 0 &&
-                                        <input  type="number"
-                                                step="any"
-                                                value={this.state.trust[this.state.voters.indexOf(data)]}
-                                                onChange={this.onTrustChange(data)}
-                                                className="StateTrustNumber"/>
-                                    }
-                                    
-                                    {'\u00A0'}{'\u00A0'}
-
+                                {this.state.voters.indexOf(data) >= 0 &&
+                                    <input  type="number"
+                                            step="any"
+                                            value={this.state.trust[this.state.voters.indexOf(data)]}
+                                            onChange={this.onTrustChange(data)}
+                                            className="StateTrustNumber"/>
+                                }
+                                
+                                <div className="LabelStyle">
                                     {data}
+                                </div>
+
                             </div>
                         )}
                     </div>
@@ -262,15 +265,16 @@ class Voting extends React.Component {
                       className="Upload"
                       withIcon={false}
                       withLabel={false}
-                      buttonText={<BackupOutlinedIcon/>}
+                      buttonText={<div> <BackupOutlinedIcon/>  {" Upload image "}</div>}
                       singleImage={true}
                       onChange={this.onFileChange}
                       imgExtension={['.jpg', '.png']}
                       maxFileSize={5242880}
                     />
 
-
-                    {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
+                    <div className="OptionsPictureContainer">
+                        {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
+                    </div>
 
                 </div>
                 

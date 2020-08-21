@@ -21,6 +21,7 @@
 
 .Upload .fileContainer { 
     background-color: transparent !important;
+    
     padding: 0px !important;
     margin: 0px !important;
 }
@@ -32,4 +33,5 @@
 
 .Upload .fileContainer button,  .RefreshButton { 
     background-color: transparent !important;
+
 }

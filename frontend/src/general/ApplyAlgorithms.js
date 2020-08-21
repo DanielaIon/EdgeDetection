@@ -119,14 +119,15 @@ class Algorithms extends React.Component {
                           className="Upload"
                           withIcon={false}
                           withLabel={false}
-                          buttonText={<BackupOutlinedIcon/>}
+                          buttonText={<div> <BackupOutlinedIcon/>  {" Upload image "}</div>}
                           singleImage={true}
                           onChange={this.onFileChange}
                           imgExtension={['.jpg', '.png']}
                           maxFileSize={5242880}
                   />
-                  
-                  {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
+                  <div className="OptionsPictureContainer">
+                      {this.state.imgUrl && <img src={this.state.imgUrl} className="OptionsPicture"/>}
+                  </div>
                 </div>
             </div>
 

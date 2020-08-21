@@ -86,8 +86,14 @@
   vertical-align: top;
 }
 
-.OptionsPicture {
+.OptionsPictureContainer {
   width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.OptionsPicture {
+  max-height: 150px;
 }
 
 .Pictures {
@@ -134,7 +140,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color:#005511;
+  background-color:#7a3db8;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
