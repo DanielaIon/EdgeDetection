@@ -94,9 +94,11 @@ class Tile extends React.Component {
                         </td>
                     </tr>
                 </table>
-                <img    src={this.state.loading ? "https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" : this.state.result}
-                        onClick={this.onImageClick}
-                        className={this.state.open ? 'magnified' : 'small'}/>
+                <div className={this.state.open ? 'tile-container' : 'none'}>
+                    <img    src={this.state.loading ? "https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" : this.state.result}
+                            onClick={this.onImageClick}
+                            className={this.state.open ? 'magnified' : 'small'}/>
+                </div>
             </div>
         );
     }
