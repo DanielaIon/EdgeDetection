@@ -4,6 +4,7 @@ import './Merge.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
 import ImageUploader from 'react-images-upload'; 
+import Spinner from 'react-bootstrap/Spinner'
 
 const axios = require('axios');
 
@@ -114,11 +115,17 @@ class Algorithms extends React.Component {
             <br/>
           </div>
           <div className="MergedPictures">
-            {this.state.imgUrl &&
-                <img
+            {this.state.imgUrl && 
+              (!this.state.loading
+                ?<img
                   className="MergedPicture"
-                  src={this.state.loading ? "https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" : this.state.result}
+                  src={this.state.result}
                 />
+                :<div className="LoadingImage">
+                    <br/>
+                    <Spinner animation="border" className="spinner"/>
+                </div>
+              )
             }
           </div>
         </div>

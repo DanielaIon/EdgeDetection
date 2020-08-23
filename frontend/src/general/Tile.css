@@ -38,4 +38,17 @@
     color: white;
 }
 
-   
+.spinner{
+    /* padding: 10px 10px; */
+    border: 2px solid #7a3db8;
+    border-right-color: transparent;
+    
+}
+
+.LoadingImage{
+    width: 18vw;
+    height: 18vw;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

@@ -2,15 +2,13 @@ import React from 'react';
 // import logo from './girl.jpg';
 import './Voting.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
-import RefreshIcon from '@material-ui/icons/Refresh';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import UploadImage from './UploadImage';
 import ImageUploader from 'react-images-upload'; 
-import Accordion from 'react-bootstrap/Accordion'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import Spinner from 'react-bootstrap/Spinner'
 
 
 const axios = require('axios');
@@ -277,12 +275,18 @@ class Voting extends React.Component {
 
                 </div>
                 
-            <div>
-                {this.state.imgUrl  &&
-                    <div className="ElectionPictures">
-                        <img src={this.state.loading ? "https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" : this.state.result}
-                            className="ElectionResult"/>
+            <div className="ElectionPictures">
+                {this.state.imgUrl && 
+                (!this.state.loading
+                    ?<img
+                        className="ElectionResult"
+                        src={this.state.result}
+                    />
+                    :<div className="LoadingImage">
+                        <br/>
+                        <Spinner animation="border" className="spinner"/>
                     </div>
+                )
                 }
             </div>
         </div>

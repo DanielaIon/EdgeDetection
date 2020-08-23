@@ -1,9 +1,9 @@
 import React from 'react';
-import RefreshIcon from '@material-ui/icons/Refresh';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
 import './Tile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import ImageUploader from 'react-images-upload'; 
+import Spinner from 'react-bootstrap/Spinner'
 
 
 const axios = require('axios');
@@ -74,31 +74,30 @@ class Tile extends React.Component {
     render() {
         return (
             <div className="tile">
-                <p>{this.state.title}</p>
-                <table className="Table">
-                    <tr className="Buttons">
-                        {/* <td>
-                            <button type="submit" onClick={this.load} className="RefreshButton"><RefreshIcon/></button>
-                        </td> */}
-                        <td>
-                            <ImageUploader
-                                className="Upload"
-                                withIcon={false}
-                                withLabel={false}
-                                buttonText={<BackupOutlinedIcon/>}
-                                singleImage={true}
-                                onChange={this.upload}
-                                imgExtension={['.jpg', '.png', '.jpeg']}
-                                maxFileSize={5242880}
-                            />
-                        </td>
-                    </tr>
-                </table>
-                <div className={this.state.open ? 'tile-container' : 'none'}>
-                    <img    src={this.state.loading ? "https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" : this.state.result}
-                            onClick={this.onImageClick}
-                            className={this.state.open ? 'magnified' : 'small'}/>
-                </div>
+                <p>{this.state.title} </p> 
+                {!this.state.loading 
+                    ?<div>
+                        <ImageUploader
+                            className="Upload"
+                            withIcon={false}
+                            withLabel={false}
+                            buttonText={<BackupOutlinedIcon/>}
+                            singleImage={true}
+                            onChange={this.upload}
+                            imgExtension={['.jpg', '.png', '.jpeg']}
+                            maxFileSize={5242880}
+                        />
+                        <div className={this.state.open ? 'tile-container' : 'none'}>
+                            <img    src={this.state.result}
+                                    onClick={this.onImageClick}
+                                    className={this.state.open ? 'magnified' : 'small'}/>
+                        </div>
+                    </div>
+                    :
+                    <div className="LoadingImage">
+                        <br/>
+                        <Spinner animation="border" className="spinner"/>
+                    </div>}
             </div>
         );
     }
