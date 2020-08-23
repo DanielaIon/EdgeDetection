@@ -2,9 +2,7 @@ import React from 'react';
 // import logo from './girl.jpg';
 import './Merge.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
-import RefreshIcon from '@material-ui/icons/Refresh';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
-import UploadImage from './UploadImage';
 import ImageUploader from 'react-images-upload'; 
 
 const axios = require('axios');
@@ -31,7 +29,6 @@ class Algorithms extends React.Component {
           options: res.data,
           selectedOptions: res.data,
         });
-        console.log(res.data);
       }).catch((error) => {
         console.log(error);
       });
@@ -59,8 +56,6 @@ class Algorithms extends React.Component {
       imgUrl: url,
       loading: true
     });
-
-    console.log(this.state.selectedOptions);
 
     const formData = new FormData();
     formData.append( 
@@ -109,7 +104,7 @@ class Algorithms extends React.Component {
                       buttonText={<div> <BackupOutlinedIcon/>  {" Upload image "}</div>}
                       singleImage={true}
                       onChange={this.onFileChange}
-                      imgExtension={['.jpg', '.png']}
+                      imgExtension={['.jpg', '.png', '.jpeg']}
                       maxFileSize={5242880}
               />
               <div className="OptionsPictureContainer">
@@ -122,7 +117,7 @@ class Algorithms extends React.Component {
             {this.state.imgUrl &&
                 <img
                   className="MergedPicture"
-                  src={this.state.loading ? "https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" : this.state.result}
+                  src={this.state.loading ? "https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" : this.state.result}
                 />
             }
           </div>

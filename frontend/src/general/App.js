@@ -4,7 +4,8 @@ import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import Algorithms from './ApplyAlgorithms.js';
 import Merge from './Merge.js';
-import Voting from './Voting';
+import Voting from './Voting.js';
+import Home from './Home.js';
 
 class App extends React.Component {
  
@@ -24,18 +25,20 @@ class App extends React.Component {
              {/* navbar */}
             <div className='container-fluid body' >
                 <ul className="NavBar">
-                    <li style={{'width':'270px'}}><Link to="/home">HOME</Link></li>
-                    <li><Link to="/">Classic algorithms</Link></li>
+                    <li style={{'width':'270px'}}><Link to="/">HOME</Link></li>
+                    <li><Link to="/classics">Classic algorithms</Link></li>
                     <li><Link to="/merge">Merge algorithms results</Link></li>
                     <li><Link to="/voting">Voting algorithm</Link></li>
                 </ul>   
             </div>
 
             <Switch>
-                <Route exact path="/">
+                <Route exact path="/classics">
                     <Algorithms/>
                 </Route>
-
+                <Route exact path="/">
+                    <Home/>
+                </Route>
                 <Route exact path="/merge">
                     <Merge/>
                 </Route>

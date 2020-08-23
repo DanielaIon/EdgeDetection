@@ -5,6 +5,7 @@ import './Tile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import ImageUploader from 'react-images-upload'; 
 
+
 const axios = require('axios');
 
 class Tile extends React.Component {
@@ -87,14 +88,13 @@ class Tile extends React.Component {
                                 buttonText={<BackupOutlinedIcon/>}
                                 singleImage={true}
                                 onChange={this.upload}
-                                imgExtension={['.jpg', '.png']}
+                                imgExtension={['.jpg', '.png', '.jpeg']}
                                 maxFileSize={5242880}
                             />
                         </td>
                     </tr>
                 </table>
-                {/* <img    src={this.state.loading ? "https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" : this.state.result} */}
-                <img    src={this.state.loading ? "https://i.pinimg.com/originals/25/ef/28/25ef280441ad6d3a5ccf89960b4e95eb.gif" : this.state.result}
+                <img    src={this.state.loading ? "https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" : this.state.result}
                         onClick={this.onImageClick}
                         className={this.state.open ? 'magnified' : 'small'}/>
             </div>

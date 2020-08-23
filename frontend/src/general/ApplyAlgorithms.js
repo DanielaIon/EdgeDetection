@@ -31,7 +31,6 @@ class Algorithms extends React.Component {
   }
 
   onFileChange = (e) => {
-    console.log(e[0]);
     let file = e[0]
     let url = URL.createObjectURL(file);
     this.setState({img: file, imgUrl: url});
@@ -122,7 +121,7 @@ class Algorithms extends React.Component {
                           buttonText={<div> <BackupOutlinedIcon/>  {" Upload image "}</div>}
                           singleImage={true}
                           onChange={this.onFileChange}
-                          imgExtension={['.jpg', '.png']}
+                          imgExtension={['.jpg', '.png', '.jpeg']}
                           maxFileSize={5242880}
                   />
                   <div className="OptionsPictureContainer">

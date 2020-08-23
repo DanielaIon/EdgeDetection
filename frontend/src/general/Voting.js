@@ -116,8 +116,6 @@ class Voting extends React.Component {
     }
 
     onCheckBoxClicked = (value) => {
-        console.log(this.state.voters);
-        console.log(this.state.trust);
         return (e) => {
             if (e.target.checked) {
                 this.setState({
@@ -268,7 +266,7 @@ class Voting extends React.Component {
                       buttonText={<div> <BackupOutlinedIcon/>  {" Upload image "}</div>}
                       singleImage={true}
                       onChange={this.onFileChange}
-                      imgExtension={['.jpg', '.png']}
+                      imgExtension={['.jpg', '.png', '.jpeg']}
                       maxFileSize={5242880}
                     />
 
@@ -281,7 +279,7 @@ class Voting extends React.Component {
             <div>
                 {this.state.imgUrl  &&
                     <div className="ElectionPictures">
-                        <img src={this.state.loading ? "https://i.pinimg.com/originals/a2/dc/96/a2dc9668f2cf170fe3efeb263128b0e7.gif" : this.state.result}
+                        <img src={this.state.loading ? "https://i.pinimg.com/originals/58/4b/60/584b607f5c2ff075429dc0e7b8d142ef.gif" : this.state.result}
                             className="ElectionResult"/>
                     </div>
                 }
