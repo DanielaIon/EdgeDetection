@@ -71,11 +71,16 @@
   }
   
   .NavBar li a {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: block; */
     color: white;
     text-align: center;
     padding: 14px 16px;
+    height: 72.633px;
     text-decoration: none;
+    
   }
   
   .NavBar li a:hover:not(.active) {

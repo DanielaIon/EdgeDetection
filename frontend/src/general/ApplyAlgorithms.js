@@ -51,16 +51,25 @@ class Algorithms extends React.Component {
     }
   }
 
+  onSelectAll = (data) => {
+    return (e) => {
+      if (e.target.checked) {
+        this.setState({
+          selectedData: data
+        });
+
+      } else {
+        this.setState({
+          selectedData: []
+        });
+      }
+    }
+  }
   
   render() {
-    this.state.selectedData.forEach(d => console.log(d))
+    console.log(this.state.selectedData.map(d => d.name));
 
     const data = [
-      {id: 0,
-        address: "http://localhost:8080/edge-detection/test",
-        name: "TEST",
-        image: this.state.test},
-
       {id: 1,
       address: "http://localhost:8080/edge-detection/sobel",
       name: "Sobel",
@@ -101,15 +110,27 @@ class Algorithms extends React.Component {
       <div className="App">
         <div className="DivContainer">
             <div className="Options">
+              <div>
+                <label className="container">
+                  Select all
+                  <input
+                    type="checkbox"
+                    checked={this.state.selectedData.length === data.length}
+                    onClick={this.onSelectAll(data)}
+                />
+                <span className="checkmark"></span>
+                </label>
+              </div>  
               {data.map(d => 
                   <div>
                     <label className="container">
                       {d.name}
                       <input
                         type="checkbox"
+                        checked={this.state.selectedData.filter(s => s.id === d.id).length > 0}
                         onClick={this.onCheckBoxClicked(d)}
                     />
-                    <span class="checkmark"></span>
+                    <span className="checkmark"></span>
                     </label>
                   </div>  
                 )}

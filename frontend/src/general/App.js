@@ -6,6 +6,7 @@ import Algorithms from './ApplyAlgorithms.js';
 import Merge from './Merge.js';
 import Voting from './Voting.js';
 import Home from './Home.js';
+import Logo from '../resources/horizon_white.png';
 
 class App extends React.Component {
  
@@ -25,12 +26,17 @@ class App extends React.Component {
              {/* navbar */}
             <div className='container-fluid body' >
                 <ul className="NavBar">
-                    <li style={{'width':'270px'}}><Link to="/">HOME</Link></li>
+                    <li style={{'width':'270px'}}>
+                        <Link to="/">
+                            <img src={Logo} width={200}/>
+                        </Link>
+                    </li>
                     <li><Link to="/classics">Classic algorithms</Link></li>
                     <li><Link to="/merge">Merge algorithms results</Link></li>
                     <li><Link to="/voting">Voting algorithm</Link></li>
                 </ul>   
             </div>
+            <br/>
 
             <Switch>
                 <Route exact path="/classics">

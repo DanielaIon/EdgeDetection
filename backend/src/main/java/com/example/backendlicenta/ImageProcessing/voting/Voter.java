@@ -1,8 +1,6 @@
 package com.example.backendlicenta.ImageProcessing.voting;
 
 import com.example.backendlicenta.ImageProcessing.edgeDetection.IEdgeDetection;
-import com.example.backendlicenta.ImageProcessing.voting.binarization.Binarization;
-import com.example.backendlicenta.ImageProcessing.voting.binarization.BinarizationThresholdStrategy;
 import org.opencv.core.Mat;
 
 public class Voter {
@@ -13,9 +11,23 @@ public class Voter {
         this.edgeDetection = edgeDetection;
     }
 
-    public boolean[][] vote(Mat image, BinarizationThresholdStrategy thresholdSelection) {
+    public boolean[][] vote(Mat image, Double binarizationThreshold) {
         Mat output = edgeDetection.apply(image);
-        return Binarization.apply(output, thresholdSelection);
+        return apply(output, binarizationThreshold);
+    }
+
+    private boolean[][] apply(Mat image, Double binarizationThreshold) {
+        boolean[][] votes = new boolean[image.height()][image.width()];
+
+        for (int row = 0; row < image.height(); row++) {
+            for (int column = 0; column < image.width(); column++) {
+                if (image.get(row, column)[0] >= binarizationThreshold) {
+                    votes[row][column] = true;
+                }
+            }
+        }
+
+        return votes;
     }
 
 }

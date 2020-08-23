@@ -22,11 +22,8 @@ class Voting extends React.Component {
             voters: [],
             trust: [],
 
-            trustReevaluationOptions: [],
-            trustReevaluation: null,
-
-            binarizationThresholdOptions: [],
-            binarizationThreshold: null,
+            trustReevaluation: 5,
+            binarizationThreshold: 128,
 
             trustThreshold: 0.5,
             
@@ -164,8 +161,9 @@ class Voting extends React.Component {
     }
 
     onTrustThresholdChange = (e) => {
+        console.log(e.target)
         this.setState({
-            onTrustThresholdChange: parseFloat(e.target.value)
+            trustThreshold: parseFloat(e.target.value)
         });
     }
 
@@ -185,7 +183,7 @@ class Voting extends React.Component {
                                                 onChange={this.onCheckBoxClicked(data)}
                                         />
 
-                                        <span class="checkmark"></span>
+                                        <span className="checkmark"></span>
                                     </label> 
                                 </div>
 
@@ -210,21 +208,14 @@ class Voting extends React.Component {
                     <br/>
                     
                     <div>
-                        Trust Reevaluation Strategy:
+                        Trust Adjustment Percent:
                         <br/>
-                        <select className="Inputs"
-                                onChange={this.onTrustReevaluationChange}>
-                            {this.state.trustReevaluationOptions.map((op, idx) => 
-                                <option 
-                                    value={op} 
-                                    key={idx}
-                                    selected={op===this.state.trustReevaluation}>
-                                   
-                                    {op}
-                                    
-                                </option> 
-                            )}
-                        </select>
+                        <input  className="slider" id="trustAdjustmentPercent"
+                                type="range" min="1" max="50"
+                                value={this.state.trustReevaluation}
+                                onChange={this.onTrustReevaluationChange}
+                        />
+                        {this.state.trustReevaluation}
                     </div>
                        
                     <br/>
@@ -232,17 +223,12 @@ class Voting extends React.Component {
                     <div>
                         Binarization Threshold Strategy:
                         <br/>
-                        <select className="Inputs"
-                                onChange={this.onBinarizationThresholdChange}>
-                            {this.state.binarizationThresholdOptions.map((op, idx) => 
-                                <option
-                                        value={op} 
-                                        key={idx}
-                                        selected={op===this.state.binarizationThreshold}>
-                                    {op}
-                                </option> 
-                            )}
-                        </select>
+                        <input  className="slider" id="trustAdjustmentPercent"
+                                type="range" min="1" max="255"
+                                value={this.state.binarizationThreshold}
+                                onChange={this.onBinarizationThresholdChange}
+                        />
+                        {this.state.binarizationThreshold}
                     </div>
 
                     <br/>
@@ -250,11 +236,17 @@ class Voting extends React.Component {
                     <div>
                         Trust Threshold:
                         <br/>
-                        <input  className="Inputs"
+                        {/* <input  className="Inputs"
                                 type="number"
                                 step="any"
                                 value={this.state.trustThreshold}
-                                onChange={this.onTrustThresholdChange}/>
+                                onChange={this.onTrustThresholdChange}/> */}
+                        <input  className="slider" id="trustAdjustmentPercent"
+                                type="range" min="0" max="1" step="0.01"
+                                value={this.state.trustThreshold}
+                                onChange={this.onTrustThresholdChange}
+                        />
+                        {this.state.trustThreshold * 100}%
                     </div>
 
                     <br/>
