@@ -26,7 +26,7 @@ class App extends React.Component {
              {/* navbar */}
             <div className='container-fluid body' >
                 <ul className="NavBar">
-                    <li style={{'width':'270px'}}>
+                    <li style={{'width':'300px'}}>
                         <Link to="/">
                             <img src={Logo} width={200}/>
                         </Link>

@@ -32,3 +32,21 @@
   width: 200px;
 }
 
+.card{
+  background-color: #ddd5e1;
+  border:0px
+}
+.card-header{
+  padding: 0;
+  align-content: left;
+  background-color: transparent;
+  border-bottom:none;
+  text-decoration: none !important;
+}
+
+.btn-link{
+  color: black;
+}
+.card-body {
+  padding: 0;
+}

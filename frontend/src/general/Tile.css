@@ -30,6 +30,10 @@
     border: 0px;
 }
 
+.MuiSvgIcon-root.uploadIcon2 {
+    color: black;
+}
+
 .MuiSvgIcon-root {
     color: white;
 }

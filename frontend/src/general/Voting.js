@@ -4,8 +4,14 @@ import './Voting.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import RefreshIcon from '@material-ui/icons/Refresh';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import UploadImage from './UploadImage';
 import ImageUploader from 'react-images-upload'; 
+import Accordion from 'react-bootstrap/Accordion'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+
 
 const axios = require('axios');
 
@@ -29,6 +35,7 @@ class Voting extends React.Component {
             
             open: false,
             loading: false,
+            expanded: true,
         };
     }
 
@@ -172,85 +179,87 @@ class Voting extends React.Component {
     return (
         <div className="App">
                 <div  className="Options">
-                    <div>
-                        Edge Detection Strategies:
-                        {this.state.voterOptions.map((data, idx) => 
-                            <div key={idx}>
-                                <div className="VoteCheckbox">
-                                    <label className="container">
-                                        <input  type="checkbox"
-                                                checked={this.state.voters.indexOf(data) >= 0}
-                                                onChange={this.onCheckBoxClicked(data)}
-                                        />
+                        <Accordion defaultActiveKey="0">
+                            <Card>
+                                <Card.Header>
+                                <Accordion.Toggle as="div" variant="link" eventKey="0" 
+                                    onClick={(e) => this.setState({expanded: !this.state.expanded})}>
+                                    {this.state.expanded
+                                        ? <ExpandLessIcon className="uploadIcon2"/>
+                                        : <ExpandMoreIcon className="uploadIcon2"/>}
+                                    Edge Detection Strategies
+                                </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="0">
+                                <Card.Body>
+                                    {this.state.voterOptions.map((data, idx) => 
+                                        <div key={idx}>
+                                            <div className="VoteCheckbox">
+                                                <label className="container">
+                                                    <input  type="checkbox"
+                                                            checked={this.state.voters.indexOf(data) >= 0}
+                                                            onChange={this.onCheckBoxClicked(data)}
+                                                    />
 
-                                        <span className="checkmark"></span>
-                                    </label> 
-                                </div>
+                                                    <span className="checkmark"></span>
+                                                </label> 
+                                            </div>
 
-                                {'\u00A0'}{'\u00A0'}
+                                            {'\u00A0'}{'\u00A0'}
 
-                                {this.state.voters.indexOf(data) >= 0 &&
-                                    <input  type="number"
-                                            step="any"
-                                            value={this.state.trust[this.state.voters.indexOf(data)]}
-                                            onChange={this.onTrustChange(data)}
-                                            className="StateTrustNumber"/>
-                                }
-                                
-                                <div className="LabelStyle">
-                                    {data}
-                                </div>
+                                            {this.state.voters.indexOf(data) >= 0 &&
+                                                <input  type="number"
+                                                        step="any"
+                                                        value={this.state.trust[this.state.voters.indexOf(data)]}
+                                                        onChange={this.onTrustChange(data)}
+                                                        className="StateTrustNumber"/>
+                                            }
+                                            
+                                            <div className="LabelStyle">
+                                                {data}
+                                            </div>
 
-                            </div>
-                        )}
-                    </div>
-
-                    <br/>
-                    
-                    <div>
-                        Trust Adjustment Percent:
+                                        </div>
+                                    )}
+                                    <hr/>
+                                </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                        </Accordion>
                         <br/>
-                        <input  className="slider" id="trustAdjustmentPercent"
-                                type="range" min="1" max="50"
-                                value={this.state.trustReevaluation}
-                                onChange={this.onTrustReevaluationChange}
-                        />
-                        {this.state.trustReevaluation}
-                    </div>
-                       
-                    <br/>
-
-                    <div>
-                        Binarization Threshold Strategy:
+                        <div>
+                            Trust Adjustment Percent
+                            <br/>
+                            <input  className="slider" id="trustAdjustmentPercent"
+                                    type="range" min="1" max="50"
+                                    value={this.state.trustReevaluation}
+                                    onChange={this.onTrustReevaluationChange}
+                            />
+                            {this.state.trustReevaluation}
+                        </div>
                         <br/>
-                        <input  className="slider" id="trustAdjustmentPercent"
-                                type="range" min="1" max="255"
-                                value={this.state.binarizationThreshold}
-                                onChange={this.onBinarizationThresholdChange}
-                        />
-                        {this.state.binarizationThreshold}
-                    </div>
-
-                    <br/>
-
-                    <div>
-                        Trust Threshold:
+                        <div>
+                            Binarization Threshold Strategy
+                            <br/>
+                            <input  className="slider" id="trustAdjustmentPercent"
+                                    type="range" min="1" max="255"
+                                    value={this.state.binarizationThreshold}
+                                    onChange={this.onBinarizationThresholdChange}
+                            />
+                            {this.state.binarizationThreshold}
+                        </div>
                         <br/>
-                        {/* <input  className="Inputs"
-                                type="number"
-                                step="any"
-                                value={this.state.trustThreshold}
-                                onChange={this.onTrustThresholdChange}/> */}
-                        <input  className="slider" id="trustAdjustmentPercent"
-                                type="range" min="0" max="1" step="0.01"
-                                value={this.state.trustThreshold}
-                                onChange={this.onTrustThresholdChange}
-                        />
-                        {this.state.trustThreshold * 100}%
-                    </div>
-
+                        <div>
+                            Trust Threshold
+                            <br/>
+                            <input  className="slider" id="trustAdjustmentPercent"
+                                    type="range" min="0" max="1" step="0.01"
+                                    value={this.state.trustThreshold}
+                                    onChange={this.onTrustThresholdChange}
+                            />
+                            {this.state.trustThreshold * 100}%
+                        </div>
                     <br/>
-                    
                     <ImageUploader
                       className="Upload"
                       withIcon={false}

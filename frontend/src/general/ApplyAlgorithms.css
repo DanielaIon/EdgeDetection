@@ -89,7 +89,7 @@
 }
 
 .Options {
-  width:270px;
+  width:300px;
   height: 100%;
   padding: 10px 10px;
   position: fixed;
@@ -98,6 +98,7 @@
   left: 0;
   background-color: #ddd5e1  ;
 }
+
 
 .OptionsPictureContainer {
   width: 100%;
