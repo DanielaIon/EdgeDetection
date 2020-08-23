@@ -8,7 +8,8 @@
  */
 
 import React from 'react';
-// import {PropTypes} from 'react';
+import './index.css';
+
 
 
 import PropTypes from 'prop-types';
@@ -27,7 +28,7 @@ export default class BeforeAfterSlider extends React.Component {
   }
   initialState = () => {
     return ({
-      afterWidth: 0,
+      afterWidth: 50,
       followMouse: false
     });
   };
@@ -82,7 +83,7 @@ export default class BeforeAfterSlider extends React.Component {
           width={`${this.props.styles.width}px`}
           height={`${this.props.styles.height}px`}
           />
-        <AfterImg
+        <AfterImg 
           src={this.props.afterSrc}
           width={`${this.state.afterWidth}%`}
           height={`${this.props.styles.height}px`} 
@@ -109,6 +110,8 @@ const BeforeImg = ({
     position: 'absolute',
     top: 0,
     left: 0,
+    'border-radius': '50px 15px 50px 15px',
+
   }
 
   return (
@@ -132,7 +135,9 @@ const AfterImg = ({
     width: width,
     position: 'absolute',
     top: 0,
-    left: 0
+    left: 0,
+    'border-radius': '50px 0px 0px 15px',
+    'background-clip': 'padding-box'
   }
 
   return (
