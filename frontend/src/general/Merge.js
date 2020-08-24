@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './girl.jpg';
 import './Merge.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';

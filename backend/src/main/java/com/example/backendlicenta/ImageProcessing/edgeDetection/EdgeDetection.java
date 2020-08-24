@@ -3,6 +3,11 @@ package com.example.backendlicenta.ImageProcessing.edgeDetection;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
 public class EdgeDetection {
 
     public static Mat applyCanny(Mat image, int threshold1, int threshold2) {
@@ -62,6 +67,33 @@ public class EdgeDetection {
         return applyMatrix(image,gx,gy,2,1);
     }
 
+    public static Mat applyRobinson (Mat image){
+        List<int[][]> list = new ArrayList<>();
+        list.add(new int[][]{{-1, 0, 1}, {-2, 0, 2},{-1, 0, 1}});//N
+        list.add(new int[][]{{0, 1, 2}, {-1, 0, 1},{-2, -1, 0}});//NW
+        list.add(new int[][]{{1, 2, 1}, {0, 0, 0},{-1, -2, -1}});//W
+        list.add(new int[][]{{2, 1, 0}, {1, 0, -1},{0, -1, -2}});//SW
+        list.add(new int[][]{{1, 0, -1}, {2, 0, -2},{1, 0, -1}});//S
+        list.add(new int[][]{{0, -1, -2}, {1, 0, -1},{2, 1, 0}});//SE
+        list.add(new int[][]{{-1, -2, -1}, {0, 0, 0},{1, 2, 1}}); //E
+        list.add(new int[][]{{-2, -1, 0}, {-1, 0, 1},{0, 1, 2}}); //NE
+
+        return applyMultiDirection(image,list,3);
+    }
+
+    public static Mat applyKirsch (Mat image){
+        List<int[][]> list = new ArrayList<>();
+        list.add(new int[][]{{-3, -3, 5}, {-3, 0, 5},{-3, -3, 5}});//N
+        list.add(new int[][]{{-3, 5, 5}, {-3, 0, 5},{-3, -3, -3}});//NW
+        list.add(new int[][]{{5, 5, 5}, {-3, 0, -3},{-3, -3, -3}});//W
+        list.add(new int[][]{{5, 5, -3}, {5, 0, -3},{-3, -3, -3}});//SW
+        list.add(new int[][]{{5, -3, -3}, {5, 0, -3},{5, -3, -3}});//S
+        list.add(new int[][]{{-3, -3, -3}, {5, 0, -3},{5, 5, -3}});//SE
+        list.add(new int[][]{{-3, -3, -3}, {-3, 0, -3},{5, 5, 5}}); //E
+        list.add(new int[][]{{-3, -3, -3}, {-3, 0, 5},{-3, 5, 5}}); //NE
+
+        return applyMultiDirection(image,list,3);
+    }
 
     private static Mat applyMatrix(Mat image, int[][] gx, int[][] gy, int size, int threshold) {
         Mat grayscaleImage = new Mat();
@@ -123,6 +155,45 @@ public class EdgeDetection {
         }
 
         Imgproc.cvtColor(outputImage, outputImage, Imgproc.COLOR_GRAY2RGB,3);
+        return outputImage;
+    }
+
+    private static Mat applyMultiDirection(Mat image, List<int[][]> matrixes, int size) {
+        Mat grayscaleImage = new Mat();
+        /*Convert the image to grayscale*/
+        Imgproc.cvtColor(image, grayscaleImage, Imgproc.COLOR_RGB2GRAY,1);
+
+
+        Mat outputImage = new Mat(grayscaleImage.size(),grayscaleImage.type());
+        double finalValue;
+
+        for (int row = 1; row <grayscaleImage.rows() - size + 1; row++) {
+            for (int col = 1; col <grayscaleImage.cols() - size + 1; col++) {
+                PriorityQueue<Double> list = new PriorityQueue<>(new Comparator<Double>() {
+                    @Override
+                    public int compare(Double d2, Double d1) {
+                        return Double.compare(d1, d2);
+                    }
+                });
+                for (int[][] matrix : matrixes) {
+                    double ComputedValue = 0;
+                    for (int i = 0; i < size; i++) {
+                        for (int j = 0; j < size; j++) {
+                            ComputedValue += grayscaleImage.get(row + i - 1, col + j - 1)[0] * matrix[i][j];
+                        }
+                    }
+                    list.add(ComputedValue);
+                }
+
+                finalValue = list.poll();
+
+                outputImage.put(row, col, finalValue);
+
+            }
+        }
+
+        Imgproc.cvtColor(outputImage, outputImage, Imgproc.COLOR_GRAY2RGB,3);
+
         return outputImage;
     }
 }

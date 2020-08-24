@@ -182,4 +182,43 @@ public class EdgeDetectionController {
         }
     }
 
+    @CrossOrigin
+    @PostMapping(value = "/robinson", consumes = { "multipart/form-data" })
+    public String robinson(@RequestPart("img") MultipartFile file) {
+        try {
+            byte [] content = file.getBytes();
+
+            //Citeste imaginea
+            Mat image = Imgcodecs.imdecode(new MatOfByte(content), -1);
+
+            MatOfByte mob = new MatOfByte();
+            Imgcodecs.imencode(".png", EdgeDetection.applyRobinson(image), mob);
+
+            return DatatypeConverter.printBase64Binary(mob.toArray());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/kirsch", consumes = { "multipart/form-data" })
+    public String kirsch(@RequestPart("img") MultipartFile file) {
+        try {
+            byte [] content = file.getBytes();
+
+            //Citeste imaginea
+            Mat image = Imgcodecs.imdecode(new MatOfByte(content), -1);
+
+            MatOfByte mob = new MatOfByte();
+            Imgcodecs.imencode(".png", EdgeDetection.applyKirsch(image), mob);
+
+            return DatatypeConverter.printBase64Binary(mob.toArray());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

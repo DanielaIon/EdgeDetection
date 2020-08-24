@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './girl.jpg';
 import './Voting.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
@@ -288,6 +287,7 @@ class Voting extends React.Component {
                     </div>
                 )
                 }
+
             </div>
         </div>
     );

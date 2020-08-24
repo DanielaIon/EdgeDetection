@@ -1,6 +1,13 @@
 package com.example.backendlicenta.ImageProcessing.edgeDetection;
 
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+
+import javax.xml.bind.DatatypeConverter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConvolutionFactory {
 
@@ -57,5 +64,38 @@ public class ConvolutionFactory {
 
         return new MultiMatrixEdgeDetection(gx,gy,2, 1);
     }
+
+    public IEdgeDetection robinson (){
+
+        List<int[][]> list = new ArrayList<>();
+        list.add(new int[][]{{-1, 0, 1}, {-2, 0, 2},{-1, 0, 1}});//N
+        list.add(new int[][]{{0, 1, 2}, {-1, 0, 1},{-2, -1, 0}});//NW
+        list.add(new int[][]{{1, 2, 1}, {0, 0, 0},{-1, -2, -1}});//W
+        list.add(new int[][]{{2, 1, 0}, {1, 0, -1},{0, -1, -2}});//SW
+        list.add(new int[][]{{1, 0, -1}, {2, 0, -2},{1, 0, -1}});//S
+        list.add(new int[][]{{0, -1, -2}, {1, 0, -1},{2, 1, 0}});//SE
+        list.add(new int[][]{{-1, -2, -1}, {0, 0, 0},{1, 2, 1}}); //E
+        list.add(new int[][]{{-2, -1, 0}, {-1, 0, 1},{0, 1, 2}}); //NE
+
+        return new MultiDirectionEdgeDetection(list,3, 1);
+    }
+
+    public IEdgeDetection kirsch (){
+
+        List<int[][]> list = new ArrayList<>();
+        list.add(new int[][]{{-3, -3, 5}, {-3, 0, 5},{-3, -3, 5}});//N
+        list.add(new int[][]{{-3, 5, 5}, {-3, 0, 5},{-3, -3, -3}});//NW
+        list.add(new int[][]{{5, 5, 5}, {-3, 0, -3},{-3, -3, -3}});//W
+        list.add(new int[][]{{5, 5, -3}, {5, 0, -3},{-3, -3, -3}});//SW
+        list.add(new int[][]{{5, -3, -3}, {5, 0, -3},{5, -3, -3}});//S
+        list.add(new int[][]{{-3, -3, -3}, {5, 0, -3},{5, 5, -3}});//SE
+        list.add(new int[][]{{-3, -3, -3}, {-3, 0, -3},{5, 5, 5}}); //E
+        list.add(new int[][]{{-3, -3, -3}, {-3, 0, 5},{-3, 5, 5}}); //NE
+
+        return new MultiDirectionEdgeDetection(list,3, 1);
+    }
+
+
+
 
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './girl.jpg';
 import './ApplyAlgorithms.css';
 import UploadImage from './UploadImage';
 import 'bootstrap/dist/css/bootstrap.min.css';  
@@ -23,7 +22,8 @@ class Algorithms extends React.Component {
         canny: null,
         scharr: null,
         roberts: null,
-        test: null,
+        robinson: null,
+        kirsch: null,
         selectedData:[],
       };
 
@@ -70,6 +70,11 @@ class Algorithms extends React.Component {
     console.log(this.state.selectedData.map(d => d.name));
 
     const data = [
+      {id: 0,
+      address: "http://localhost:8080/edge-detection/robinson",
+      name: "Robinson",
+      image: this.state.robinson},
+
       {id: 1,
       address: "http://localhost:8080/edge-detection/sobel",
       name: "Sobel",
@@ -104,6 +109,11 @@ class Algorithms extends React.Component {
       address: "http://localhost:8080/edge-detection/laplace",
       name: "Laplacian",
       image: this.state.laplace},
+
+      {id: 8,
+        address: "http://localhost:8080/edge-detection/kirsch",
+        name: "Kirsch ",
+        image: this.state.kirsch},
       ];
  
      return (

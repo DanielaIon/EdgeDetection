@@ -19,8 +19,8 @@ public class VotingService {
     public VotingService() {
         this.votersRegistry = new HashMap<String, Voter>() {
             {
-                put("Laplace", new Voter(ConvolutionFactory.getInstance().laplace()));
-                put("Laplace with diagonals", new Voter(ConvolutionFactory.getInstance().laplaceDiag()));
+                put("Laplacian", new Voter(ConvolutionFactory.getInstance().laplace()));
+                put("Laplacian with diagonals", new Voter(ConvolutionFactory.getInstance().laplaceDiag()));
                 put("Sobel", new Voter(ConvolutionFactory.getInstance().sobel()));
                 put("Sobel-Feldman", new Voter(ConvolutionFactory.getInstance().sobelFeldman()));
                 put("Scharr", new Voter(ConvolutionFactory.getInstance().scharr()));

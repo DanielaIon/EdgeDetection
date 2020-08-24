@@ -24,8 +24,10 @@ public class MergeController {
     public MergeController() {
         this.edgeDetectionMap = new HashMap<>();
 
-        this.edgeDetectionMap.put("Laplace", ConvolutionFactory.getInstance().laplace());
-        this.edgeDetectionMap.put("Laplace diagonal", ConvolutionFactory.getInstance().laplaceDiag());
+        this.edgeDetectionMap.put("Laplacian", ConvolutionFactory.getInstance().laplace());
+        this.edgeDetectionMap.put("Robinson", ConvolutionFactory.getInstance().robinson());
+        this.edgeDetectionMap.put("Kirsch", ConvolutionFactory.getInstance().kirsch());
+        this.edgeDetectionMap.put("Laplacian with diagonals", ConvolutionFactory.getInstance().laplaceDiag());
         this.edgeDetectionMap.put("Prewitt", ConvolutionFactory.getInstance().prewitt());
         this.edgeDetectionMap.put("Roberts", ConvolutionFactory.getInstance().roberts());
         this.edgeDetectionMap.put("Scharr", ConvolutionFactory.getInstance().scharr());

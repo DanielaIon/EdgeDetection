@@ -9,13 +9,6 @@ class Home extends Component {
   render () {
     return (
       <div className="MyPicture">
-        {/* <BeforeAfterSlider 
-          // className="MySlider"
-          after={Before}
-          before={After}
-          width={800}
-          height={600}
-        /> */}
         <BeforeAfterSlider
           beforeSrc={Before}
           afterSrc={After}
