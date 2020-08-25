@@ -46,9 +46,11 @@ class App extends React.Component {
                 <Route exact path="/classics">
                     <Algorithms/>
                 </Route>
+                
                 <Route exact path="/">
                     <Home/>
                 </Route>
+
                 <Route exact path="/merge">
                     <Merge/>
                 </Route>

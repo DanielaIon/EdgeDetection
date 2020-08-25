@@ -2,7 +2,7 @@ import React from 'react';
 import './ApplyAlgorithms.css';
 import './AnotherAproach.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
-import Tile from './Tile.js';
+import TimelineTile from './TimelineTile.js';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined'; 
 import ImageUploader from 'react-images-upload'; 
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
@@ -23,7 +23,7 @@ class Algorithms extends React.Component {
         edgeFollowing: null,
         hystersisThresholding: null,
         finalResult: null,
-        selectedData:[],
+        open: false,
       };
 
       this.onFileChange = this.onFileChange.bind(this);
@@ -32,52 +32,26 @@ class Algorithms extends React.Component {
   onFileChange = (e) => {
     let file = e[0]
     let url = URL.createObjectURL(file);
-    this.setState({img: file, imgUrl: url});
+    this.setState({
+      img: file, 
+      imgUrl: url,
+      gaussianFilter: url,
+      gradient: url,
+      nms: url,
+      laplacian: url,
+      edgeFollowing: url,
+      hystersisThresholding: url,
+      finalResult: url,
+    });
   }
 
-  onCheckBoxClicked = (value) => {
-    return (e) => {
-      if (e.target.checked) {
-
-        this.setState({
-          selectedData: [...this.state.selectedData, value]
-        });
-      } else {
-        this.setState({
-          selectedData: this.state.selectedData.filter(o => o.name !== value.name)
-        });
-      }
-    }
+  onImageClick = (e) => {
+    e.preventDefault();
+    this.setState({open: !this.state.open});
   }
 
-  onSelectAll = (data) => {
-    return (e) => {
-      if (e.target.checked) {
-        this.setState({
-          selectedData: data
-        });
-
-      } else {
-        this.setState({
-          selectedData: []
-        });
-      }
-    }
-  }
-  
   render() {
-    console.log(this.state.selectedData.map(d => d.name));
-
     const data = [
-      {id: 0,
-        address: "",
-        name: "Original Image",
-        image: this.state.img},
-      {id: 1,
-        address: "http://localhost:8080/new-edge-detection-algorithm/gaussianFilter",
-        name: "Gaussian Filter",
-        image: this.state.gaussianFilter},
-
       {id: 2,
         address: "http://localhost:8080/new-edge-detection-algorithm/gradient",
         name: "Gradient",
@@ -94,117 +68,65 @@ class Algorithms extends React.Component {
         image: this.state.laplacian},
 
       {id: 5,
-        address: "http://localhost:8080/new-edge-detection-algorithm/edgeFollowing",
+        address: "http://localhost:8080/new-edge-detection-algorithm/edge-following",
         name: "Edge Following",
         image: this.state.gaussianFilter},
 
-      {id: 6,
-        address: "http://localhost:8080/new-edge-detection-algorithm/hystersisThresholding",
-        name: "Hystersis Thresholding",
-        image: this.state.gaussianFilter},
-
-      {id: 7,
-        address: "http://localhost:8080/new-edge-detection-algorithm/finalResult",
-        name: "Final Result",
-        image: this.state.finalResult},
       ];
  
      return (
       <div className="App">
-        <div className="DivContainer">
+        {!this.state.imgUrl
+        ?
+        <div height="0px">
+          <ImageUploader
+                  className="AnotherAproach"
+                  withIcon={false}
+                  withLabel={false}
+                  buttonText={<div> <BackupOutlinedIcon/>  {" Upload image "}</div>}
+                  singleImage={true}
+                  onChange={this.onFileChange}
+                  imgExtension={['.jpg', '.png', '.jpeg']}
+                  maxFileSize={5242880}
+          />
+        </div>
+
+        :<div className="DivContainer">
             <VerticalTimeline>
-              
+
             <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{ background:  '#BD9EDC', color: '#000000' }}
-                contentArrowStyle={{ borderRight: '7px solid  #BD9EDC' }}
-                date="Original Image"
-                iconStyle={{ background:  '#BD9EDC', color: '#000000' }}
-                icon={<ArrowLeft />}
-              >
-              <p>Original Image should be here</p>
-              </VerticalTimelineElement>
-              
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{ background: '#7a3db8', color: '#000000' }}
-                contentArrowStyle={{ borderRight: '7px solid  #7a3db8' }}
-                date="Gaussian Filter"
-                iconStyle={{ background: '#7a3db8', color: '#000000' }}
-                icon={<ArrowRight />}
-              >
-              <p>Gaussian Filter Image should be here</p>
+                      className="vertical-timeline-element--work"
+                      contentStyle={{ background:  '#BD9EDC', color: '#000000' }}
+                      contentArrowStyle={{ borderRight: '7px solid  #BD9EDC' }}
+                      date="Original image"
+                      iconStyle={{ background:  '#BD9EDC', color: '#000000' }}
+                    >
+                    <div className={this.state.open ? 'tile-container' : 'none'}>
+                        <img    src={this.state.imgUrl}
+                                onClick={this.onImageClick}
+                                className={this.state.open ? 'magnified' : 'TimelineImage'}/>
+                    </div>
               </VerticalTimelineElement>
 
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{ background:  '#BD9EDC', color: '#000000' }}
-                contentArrowStyle={{ borderRight: '7px solid  #BD9EDC' }}
-                date="Gradient"
-                iconStyle={{ background:  '#BD9EDC', color: '#000000' }}
-                icon={<ArrowLeft />}
-              >
-              <p>Gradient Image should be here</p>
-              </VerticalTimelineElement>
-              
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{background: '#7a3db8'}}
-                contentArrowStyle={{ borderRight: '7px solid  #7a3db8' }}
-                date="Non Maximum Suppresion"
-                iconStyle={{background: '#7a3db8', color: '#000000' }}
-                icon={<ArrowRight />}
-              >
-              <p>Non Maximum Suppression Image should be here</p>
-              </VerticalTimelineElement>
-
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{ background:  '#BD9EDC', color: '#000000' }}
-                contentArrowStyle={{ borderRight: '7px solid  #BD9EDC' }}
-                date="Laplacian term"
-                iconStyle={{ background:  '#BD9EDC', color: '#000000' }}
-                icon={<ArrowLeft />}
-              >
-              <p>Laplacian Image should be here</p>
-              </VerticalTimelineElement>
-              
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{ background: '#7a3db8', color: '#000000' }}
-                contentArrowStyle={{ borderRight: '7px solid  #7a3db8' }}
-                date="Edge following description"
-                iconStyle={{ background: '#7a3db8', color: '#000000' }}
-                icon={<ArrowRight />}
-              >
-              <p>Edge following Image should be here</p>
-              </VerticalTimelineElement>
-
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{ background:  '#BD9EDC', color: '#000000' }}
-                contentArrowStyle={{ borderRight: '7px solid  #BD9EDC' }}
-                date="Hystersis Thresholding description"
-                iconStyle={{ background:  '#BD9EDC', color: '#000000' }}
-                icon={<ArrowLeft />}
-              >
-              <p>Hystersis Thresholding Image should be here</p>
-              </VerticalTimelineElement>
-              
-              <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{ background: '#7a3db8', color: '#000000' }}
-                contentArrowStyle={{ borderRight: '7px solid  #7a3db8' }}
-                date="Final Result"
-                iconStyle={{ background: '#7a3db8', color: '#000000' }}
-                icon={<ArrowRight />}
-              >
-              <p>Final Image should be here</p>
-              </VerticalTimelineElement>
-
-
+              {data.map((d) => {
+                return (
+                  <VerticalTimelineElement
+                      className="vertical-timeline-element--work"
+                      contentStyle={{ background:  '#BD9EDC', color: '#000000' }}
+                      contentArrowStyle={{ borderRight: '7px solid  #BD9EDC' }}
+                      date={d.name}
+                      iconStyle={{ background:  '#BD9EDC', color: '#000000' }}
+                    >
+                    <TimelineTile key={d.id}
+                      title={d.name}
+                      img={this.state.img}
+                      reqUrl={d.address}/>
+                    </VerticalTimelineElement>
+                );})
+              }  
             </VerticalTimeline>
             </div>
+          }      
         </div>
     );
   }

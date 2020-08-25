@@ -12,3 +12,33 @@
     background: '#BD9EDC';
     color: '#000000'
 }
+
+.TimelineImage{
+    width: 450px;
+}
+
+.fileUploader.AnotherAproach {
+    padding: 50px 50px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.AnotherAproach .fileContainer { 
+    /* background-color: transparent !important; */
+    background-color: #7a3db8;
+    padding: 0px !important;
+    margin: 0px !important;
+    width: 200px !important;
+
+}
+  
+.AnotherAproach .fileContainer .chooseFileButton {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.AnotherAproach .fileContainer button,  .RefreshButton { 
+    background-color: transparent !important;
+
+}

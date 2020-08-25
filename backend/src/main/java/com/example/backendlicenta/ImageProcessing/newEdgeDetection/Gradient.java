@@ -36,7 +36,6 @@ public class Gradient {
             }
         }
 
-
         return new GradientComponents(phase, magnitude);
     }
 }
