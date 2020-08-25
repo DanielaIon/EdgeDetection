@@ -1,0 +1,14 @@
+.DarkerBackground {
+    background: '#7a3db8';
+    color: '#000000'
+}
+
+.vertical-timeline-element-content .bounce-in{
+    background: '#7a3db8' !important;
+    color: '#000000'
+}
+
+.LighterBackground{
+    background: '#BD9EDC';
+    color: '#000000'
+}

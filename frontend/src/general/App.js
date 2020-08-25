@@ -7,7 +7,9 @@ import Algorithms from './ApplyAlgorithms.js';
 import Merge from './Merge.js';
 import Voting from './Voting.js';
 import Home from './Home.js';
+import AnotherAproach from './AnotherAproach.js';
 import Logo from '../resources/horizon_white.png';
+
 
 class App extends React.Component {
  
@@ -35,6 +37,7 @@ class App extends React.Component {
                     <li><Link to="/classics">Classic algorithms</Link></li>
                     <li><Link to="/merge">Merge algorithms results</Link></li>
                     <li><Link to="/voting">Voting algorithm</Link></li>
+                    <li><Link to="/another-aproach">Another Aproach</Link></li>
                 </ul>   
             </div>
             <br/>
@@ -53,6 +56,12 @@ class App extends React.Component {
                 <Route exact path="/voting">
                     <Voting/>
                 </Route>
+
+                <Route exact path="/another-aproach">
+                    <AnotherAproach/>
+                </Route>
+
+                
             </Switch>
         </BrowserRouter>
       </div>
