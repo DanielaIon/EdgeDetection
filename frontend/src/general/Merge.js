@@ -76,12 +76,37 @@ class Algorithms extends React.Component {
       });
   }
 
+  onSelectAll = (e) => {
+    if (e.target.checked) {
+      this.setState({
+        selectedOptions: this.state.options
+      });
+
+    } else {
+      this.setState({
+        selectedOptions: []
+      });
+    }
+  }
+  
+
   render() {
     
     return (
       <div className="App">
         <div className="DivContainer">
           <div className="Options">
+            <div>
+              <label className="container">
+                Select all
+                <input
+                  type="checkbox"
+                  checked={this.state.selectedOptions.length === this.state.options.length}
+                  onClick={this.onSelectAll}
+              />
+              <span className="checkmark"></span>
+              </label>
+            </div>  
             {this.state.options.map(op => 
               <div>
                 <label className="container">

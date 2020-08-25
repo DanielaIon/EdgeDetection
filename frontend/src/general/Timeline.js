@@ -1,6 +1,6 @@
 import React from 'react';
 import './ApplyAlgorithms.css';
-import './AnotherAproach.css';
+import './Timeline.css';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import TimelineTile from './TimelineTile.js';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined'; 
