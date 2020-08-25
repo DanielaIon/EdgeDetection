@@ -182,8 +182,8 @@ class Voting extends React.Component {
                                 <Accordion.Toggle as="div" variant="link" eventKey="0" 
                                     onClick={(e) => this.setState({expanded: !this.state.expanded})}>
                                     {this.state.expanded
-                                        ? <ExpandLessIcon className="uploadIcon2"/>
-                                        : <ExpandMoreIcon className="uploadIcon2"/>}
+                                        ? <ExpandLessIcon className="BlackIcon"/>
+                                        : <ExpandMoreIcon className="BlackIcon"/>}
                                     Edge Detection Strategies
                                 </Accordion.Toggle>
                                 </Card.Header>

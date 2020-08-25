@@ -1,9 +1,7 @@
 import React from 'react';
 import './ApplyAlgorithms.css';
-import UploadImage from './UploadImage';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import Tile from './Tile.js';
-import RefreshIcon from '@material-ui/icons/Refresh';
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined'; 
 import ImageUploader from 'react-images-upload'; 
 

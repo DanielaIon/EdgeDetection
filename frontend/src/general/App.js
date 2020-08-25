@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './UploadImage.css';
 import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import Algorithms from './ApplyAlgorithms.js';
