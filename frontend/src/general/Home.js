@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import './Home.css';
 import BeforeAfterSlider from './before-after-slider/index.js';
-import Original from './before_pic.jpeg'; 
+
+import Original from '../resources/home-pic/Original.jpeg'; 
 import Canny from '../resources/home-pic/Canny.png'; 
 import Kirsch from '../resources/home-pic/Kirsch.png'; 
 import Scharr from '../resources/home-pic/Scharr.png'; 
