@@ -90,6 +90,13 @@ class Home extends Component {
   render () {
     return (
       <div>
+          <div className="MyPicture">
+            <BeforeAfterSlider
+              beforeSrc={this.state.before.src}
+              afterSrc={this.state.after.src}
+              styles={{width: 800, height: 600}} />
+          </div>
+
           <div className="ButtonContainer">
             <div className="LeftButtons">
               <center>
@@ -128,13 +135,6 @@ class Home extends Component {
             </div>
           </div>
         <br/>
-
-        <div className="MyPicture">
-          <BeforeAfterSlider
-            beforeSrc={this.state.before.src}
-            afterSrc={this.state.after.src}
-            styles={{width: 800, height: 600}} />
-        </div>
       </div>
     )
   }
