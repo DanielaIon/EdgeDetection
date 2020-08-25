@@ -139,8 +139,8 @@ class Algorithms extends React.Component {
                         type="checkbox"
                         checked={this.state.selectedData.filter(s => s.id === d.id).length > 0}
                         onClick={this.onCheckBoxClicked(d)}
-                    />
-                    <span className="checkmark"></span>
+                      />
+                     <span className="checkmark"></span>
                     </label>
                   </div>  
                 )}

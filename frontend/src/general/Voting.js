@@ -232,7 +232,9 @@ class Voting extends React.Component {
                                     value={this.state.trustReevaluation}
                                     onChange={this.onTrustReevaluationChange}
                             />
-                            {this.state.trustReevaluation}
+                            <div className="slider-value">
+                                {this.state.trustReevaluation}
+                            </div>
                         </div>
                         <br/>
                         <div>
@@ -243,7 +245,9 @@ class Voting extends React.Component {
                                     value={this.state.binarizationThreshold}
                                     onChange={this.onBinarizationThresholdChange}
                             />
-                            {this.state.binarizationThreshold}
+                            <div className="slider-value">
+                                {this.state.binarizationThreshold}
+                            </div>
                         </div>
                         <br/>
                         <div>
@@ -254,7 +258,9 @@ class Voting extends React.Component {
                                     value={this.state.trustThreshold}
                                     onChange={this.onTrustThresholdChange}
                             />
-                            {this.state.trustThreshold * 100}%
+                            <div className="slider-value">
+                                {this.state.trustThreshold * 100}%
+                            </div>
                         </div>
                     <br/>
                     <ImageUploader

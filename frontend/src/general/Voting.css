@@ -50,3 +50,14 @@
 .card-body {
   padding: 0;
 }
+
+.slider {
+  width: 220px;
+  display: inline;
+
+}
+
+.slider-value {
+  display: inline;
+  padding: 0 10px;
+}
